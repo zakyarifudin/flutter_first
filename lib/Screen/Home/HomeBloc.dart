@@ -14,7 +14,7 @@ class HomeBloc extends StatelessWidget {
           builder: (context, state) { 
             return Scaffold(
               appBar: AppBar(
-                title: Text('Coba BLOC Cuk!'),
+                title: Text('Coba BLOC Cukk!'),
               ),
               body: Center(
                 child: Column(
@@ -37,17 +37,17 @@ class HomeBloc extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget> [
                   FloatingActionButton(
-                    onPressed: () => counterBloc.add(CounterEvent.increment),
+                    onPressed: () => counterBloc.add(Increment()),
                     tooltip: 'Increment',
                     child: Icon(Icons.add),
                   ),
                   FloatingActionButton(
-                    onPressed: () => counterBloc.add(CounterEvent.decrement),
+                    onPressed: () => counterBloc.add(Decrement()),
                     tooltip: 'Decrement',
                     child: Icon(Icons.remove),
                   ),
                   FloatingActionButton(
-                    onPressed: () => counterBloc.add(CounterEvent.reset),
+                    onPressed: () => counterBloc.add(Reset()),
                     tooltip: 'Reset',
                     child: Icon(Icons.clear),
                   )
