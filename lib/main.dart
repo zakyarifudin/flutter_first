@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first/routes.dart';
 //import 'Screen/Home/index.dart';
-import 'Screen/Home/HomeBloc.dart';
+//import 'Screen/Home/HomeBloc.dart';
+
 
 
 void main() => runApp(MyApp());
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       //home: MyHomePage(title: 'Flutter Demo'),
-      home: HomeBloc(),
+      onGenerateRoute: RouteGenerator.generateRoute,
+      initialRoute: '/',
     );
   }
 }

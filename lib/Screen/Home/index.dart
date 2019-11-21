@@ -47,9 +47,22 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            Text(
-              'Zaky'
-            )
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/bloc');
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
+              textColor: Colors.black,
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                child: const Text(
+                  'Menyang BloC',
+                  style: TextStyle(fontSize: 20)
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -57,22 +70,24 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget> [
           FloatingActionButton(
+            heroTag: 'home1',
             onPressed: _incrementCounter,
             tooltip: 'Increment',
             child: Icon(Icons.add),
           ),
           FloatingActionButton(
+            heroTag: 'home2',
             onPressed: _decrementCounter,
             tooltip: 'Decrement',
             child: Icon(Icons.remove),
           ),
           FloatingActionButton(
+            heroTag: 'home3',
             onPressed: _resetCounter,
             tooltip: 'Reset',
             child: Icon(Icons.clear),
           )
         ]
-        
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
