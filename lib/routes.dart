@@ -27,7 +27,8 @@ class RouteGenerator {
             builder: (_) => Scaffold(
                   body: Center(
                       child: Text('Kesasar Kon rute ${settings.name} iki ra ana')),
-                ));
+                )
+        );
     }
   }
 }

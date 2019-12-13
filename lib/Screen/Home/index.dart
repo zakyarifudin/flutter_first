@@ -10,25 +10,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<Widget> _bottomOptions = <Widget>[
+    Home(),
+    Schedule()
+  ];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  int _selectedIndex = 0;
 
-  void _resetCounter() {
-    setState(() {
-      _counter=0;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
+  void _onItemTapped(int index) {
+  setState(() {
+    _selectedIndex = index;
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -37,58 +30,102 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times cuk:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/bloc');
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ),
-              textColor: Colors.black,
-              child: Container(
-                padding: const EdgeInsets.all(10.0),
-                child: const Text(
-                  'Menyang BloC',
-                  style: TextStyle(fontSize: 20)
-                ),
-              ),
-            ),
-          ],
-        ),
+        child: _bottomOptions.elementAt(_selectedIndex)
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget> [
-          FloatingActionButton(
-            heroTag: 'home1',
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: Icon(Icons.add),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
           ),
-          FloatingActionButton(
-            heroTag: 'home2',
-            onPressed: _decrementCounter,
-            tooltip: 'Decrement',
-            child: Icon(Icons.remove),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.access_time),
+            title: Text('Scedule'),
           ),
-          FloatingActionButton(
-            heroTag: 'home3',
-            onPressed: _resetCounter,
-            tooltip: 'Reset',
-            child: Icon(Icons.clear),
-          )
-        ]
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blueAccent,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({ Key key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        RaisedButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed('/bloc');
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          textColor: Colors.white,
+          color: Colors.blue,
+          padding: EdgeInsets.all(20),
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              'Menyang BloC',
+              style: TextStyle(fontSize: 20)
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/bloc');
+            },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            textColor: Colors.white,
+            color: Colors.blue,
+            padding: EdgeInsets.all(10),
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Infinite List',
+                style: TextStyle(fontSize: 20)
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Schedule extends StatelessWidget {
+  const Schedule({ Key key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        RaisedButton(
+          onPressed: () {},
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          textColor: Colors.black,
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              'Tara',
+              style: TextStyle(fontSize: 20)
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

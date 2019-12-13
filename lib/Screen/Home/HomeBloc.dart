@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first/Bloc/Counter/index.dart';
 
 class HomeBloc extends StatelessWidget {
-
   final counterBloc = CounterBloc();
 
   @override
@@ -29,23 +28,6 @@ class HomeBloc extends StatelessWidget {
                     ),
                     Text(
                       'Zaky Nyoba Bloc'
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/');
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      color: Colors.black,
-                      textColor: Colors.white,
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                          'Balik Umah',
-                          style: TextStyle(fontSize: 20)
-                        ),
-                      ),
                     ),
                   ],
                 ),
