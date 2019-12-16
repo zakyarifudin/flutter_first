@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/routes.dart';
-//import 'Screen/Home/index.dart';
-//import 'Screen/Home/HomeBloc.dart';
+import 'package:flutter_first/Bloc/Simple_bloc_delegate.dart';
+import 'package:bloc/bloc.dart';
 
-
-
-void main() => runApp(MyApp());
+void main() {
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
