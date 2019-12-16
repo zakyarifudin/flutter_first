@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Screen/Home/HomeBloc.dart';
 import 'package:flutter_first/Screen/Home/index.dart';
-//import 'package:flutter_first/Screen/Home/index.dart';
+import 'package:flutter_first/Screen/InfiniteList/index.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -9,19 +9,9 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => MyHomePage(title: 'Rumahku'));
       case '/bloc':
-        //return MaterialPageRoute(builder: (_) => HomeBloc());
-        return PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => HomeBloc(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(-1, 0),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              );
-          },
-        );
+        return PageAnimation(screen: HomeBloc());
+      case '/infinite-list':
+        return PageAnimation(screen: InfiniteList());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
@@ -31,4 +21,21 @@ class RouteGenerator {
         );
     }
   }
+}
+
+class PageAnimation extends PageRouteBuilder {
+
+  final Widget screen;
+
+  PageAnimation({@required this.screen}) : 
+  super(pageBuilder: (context, animation, secondaryAnimation) => screen,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(1, 0),
+            end: Offset.zero,
+          ).animate(animation),
+          child: child,
+        );
+    }); 
 }

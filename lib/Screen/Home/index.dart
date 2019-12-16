@@ -18,10 +18,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-  setState(() {
-    _selectedIndex = index;
-  });
-}
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class Home extends StatelessWidget {
           margin: EdgeInsets.only(top: 20),
           child: RaisedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/bloc');
+              Navigator.of(context).pushNamed('/infinite-list');
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
