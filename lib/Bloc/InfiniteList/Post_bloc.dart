@@ -1,16 +1,9 @@
-import 'dart:convert';
 import 'package:rxdart/rxdart.dart';
-
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
-
 import './index.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
-  final http.Client httpClient;
 
-  PostBloc({@required this.httpClient});
 
   @override
   Stream<PostState> transformEvents(
@@ -31,16 +24,18 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   @override
   Stream<PostState> mapEventToState(PostEvent event) async* {
     final currentState = state;
+    final PostProvider _postProvider = PostProvider();
+
     if (event is Fetch && !_hasReachedMax(currentState)) {
       try {
         if (currentState is PostUninitialized) {
-          final posts = await _fetchPosts(0, 20);
+          final posts = await _postProvider.fetchPosts(0, 20);
           yield PostLoaded(posts: posts, hasReachedMax: false);
           return;
         }
         if (currentState is PostLoaded) {
           final posts =
-              await _fetchPosts(currentState.posts.length, 20);
+              await _postProvider.fetchPosts(currentState.posts.length, 20);
           yield posts.isEmpty
               ? currentState.copyWith(hasReachedMax: true)
               : PostLoaded(
@@ -54,23 +49,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     }
   }
 
-  bool _hasReachedMax(PostState state) =>
-    state is PostLoaded && state.hasReachedMax;
+  bool _hasReachedMax(PostState state) => state is PostLoaded && state.hasReachedMax;
 
-  Future<List<Post>> _fetchPosts(int startIndex, int limit) async {
-    final response = await httpClient.get('https://jsonplaceholder.typicode.com/posts?_start=$startIndex&_limit=$limit');
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body) as List;
-      return data.map((rawPost) {
-        return Post(
-          id: rawPost['id'],
-          title: rawPost['title'],
-          body: rawPost['body'],
-        );
-      }).toList();
-    } else {
-      throw Exception('error fetching posts');
-    }
-  }
 }

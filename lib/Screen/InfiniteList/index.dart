@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Bloc/InfiniteList/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 
 class InfiniteList extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _InfiniteListState extends State<InfiniteList> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    _postBloc = PostBloc(httpClient: http.Client())..add(Fetch());
+    _postBloc = PostBloc()..add(Fetch());
     // _postBloc = BlocProvider.of<PostBloc>(context);
   }
 
