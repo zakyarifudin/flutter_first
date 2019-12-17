@@ -104,15 +104,20 @@ class PostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Text(
-        '${post.id}',
-        style: TextStyle(fontSize: 10.0),
+    return GestureDetector(
+      child: ListTile(
+        onTap: (){ 
+          Navigator.of(context).pushNamed('/post-detail', arguments : post);
+        },
+        leading: Text(
+          '${post.id}',
+          style: TextStyle(fontSize: 10.0),
+        ),
+        title: Text(post.title),
+        isThreeLine: true,
+        subtitle: Text(post.body),
+        dense: true,
       ),
-      title: Text(post.title),
-      isThreeLine: true,
-      subtitle: Text(post.body),
-      dense: true,
     );
   }
 }

@@ -34,8 +34,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           return;
         }
         if (currentState is PostLoaded) {
-          final posts =
-              await _postProvider.fetchPosts(currentState.posts.length, 20);
+          final posts = await _postProvider.fetchPosts(currentState.posts.length, 20);
           yield posts.isEmpty
               ? currentState.copyWith(hasReachedMax: true)
               : PostLoaded(

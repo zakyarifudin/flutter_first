@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first/Screen/Home/HomeBloc.dart';
 import 'package:flutter_first/Screen/Home/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/index.dart';
+import 'package:flutter_first/Screen/InfiniteList/detail.dart';
+import 'package:flutter_first/Bloc/InfiniteList/index.dart' show Post;
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+
+
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => MyHomePage(title: 'Rumahku'));
@@ -12,6 +17,9 @@ class RouteGenerator {
         return PageAnimation(screen: HomeBloc());
       case '/infinite-list':
         return PageAnimation(screen: InfiniteList());
+      case '/post-detail':
+        Post args = settings.arguments;
+        return PageAnimation(screen: PostDetail(postId: args.id));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
