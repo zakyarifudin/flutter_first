@@ -26,6 +26,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     final currentState = state;
     final PostProvider _postProvider = PostProvider();
 
+    // Fetch All Post   
     if (event is Fetch && !_hasReachedMax(currentState)) {
       try {
         if (currentState is PostUninitialized) {
@@ -39,13 +40,27 @@ class PostBloc extends Bloc<PostEvent, PostState> {
               ? currentState.copyWith(hasReachedMax: true)
               : PostLoaded(
                   posts: currentState.posts + posts,
-                  hasReachedMax: false,
+                  hasReachedMax: false
                 );
         }
       } catch (_) {
         yield PostError();
       }
     }
+
+    // Fetch Detail of Post   
+    if (event is FetchDetail) {
+      try {
+        if (currentState is PostUninitialized) {
+          final post = await _postProvider.fetchPostDetail(event.postId);
+          yield PostDetailLoaded(post: post); 
+          return;
+        }
+      } catch (_) {
+        yield PostError();
+      }
+    }
+
   }
 
   bool _hasReachedMax(PostState state) => state is PostLoaded && state.hasReachedMax;

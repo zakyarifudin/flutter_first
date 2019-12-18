@@ -12,6 +12,8 @@ class PostUninitialized extends PostState {}
 
 class PostError extends PostState {}
 
+class PostLoading extends PostState {}
+
 class PostLoaded extends PostState {
   final List<Post> posts;
   final bool hasReachedMax;
@@ -35,6 +37,19 @@ class PostLoaded extends PostState {
   List<Object> get props => [posts, hasReachedMax];
 
   @override
-  String toString() =>
-      'PostLoaded { posts: ${posts.length}, hasReachedMax: $hasReachedMax }';
+  String toString() => 'PostLoaded { posts: ${posts.length}, hasReachedMax: $hasReachedMax}';
+}
+
+class PostDetailLoaded extends PostState {
+  final Post post;
+
+  const PostDetailLoaded({
+    this.post,
+  });
+
+  @override
+  List<Object> get props => [post];
+
+  @override
+  String toString() => 'PostDetailLoaded { post : $post}';
 }
