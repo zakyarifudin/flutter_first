@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -16,11 +17,59 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   int _selectedIndex = 0;
+  final FirebaseMessaging _fcm = FirebaseMessaging();
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _navigateToScreen(Map<String, dynamic> message) {
+    final route = message['data']['route'];
+    final id = int.parse(message['data']['id']);
+    Navigator.pushNamed(
+      context,
+      route,
+      arguments :{ "postId" : id }
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // untuk fcm nya
+    _fcm.configure(
+      onMessage: (Map<String, dynamic> message) async {
+          print("onMessage: $message");
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                      content: ListTile(
+                      title: Text(message['notification']['title']),
+                      subtitle: Text(message['notification']['body']),
+                      ),
+                      actions: <Widget>[
+                      FlatButton(
+                          child: Text('Ok'),
+                          onPressed: () => {
+                            _navigateToScreen(message)
+                          }
+                      ),
+                  ],
+              ),
+          );
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        _navigateToScreen(message);
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        _navigateToScreen(message);
+      },
+    );
   }
 
   @override

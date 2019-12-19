@@ -3,12 +3,11 @@ import 'package:flutter_first/Screen/Home/HomeBloc.dart';
 import 'package:flutter_first/Screen/Home/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/detail.dart';
-import 'package:flutter_first/Bloc/InfiniteList/index.dart' show Post;
-
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
 
+    Map<String, dynamic> args = settings.arguments;
 
     switch (settings.name) {
       case '/':
@@ -18,8 +17,7 @@ class RouteGenerator {
       case '/infinite-list':
         return PageAnimation(screen: InfiniteList());
       case '/post-detail':
-        Post args = settings.arguments;
-        return PageAnimation(screen: PostDetail(postId: args.id));
+        return PageAnimation(screen: PostDetail(postId: args['postId']));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

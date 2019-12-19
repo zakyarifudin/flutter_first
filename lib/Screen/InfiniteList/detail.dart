@@ -123,6 +123,8 @@ class _PostDetail extends State<PostDetail> {
               child: Text('Check Your Intenet Connection'),
             );
           }
+
+          return Container();
         }
       )
     );

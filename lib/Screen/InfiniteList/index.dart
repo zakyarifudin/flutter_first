@@ -72,6 +72,8 @@ class _InfiniteListState extends State<InfiniteList> {
               controller: _scrollController,
             );
           }
+
+          return Container();
         },
       )
     );
@@ -107,7 +109,7 @@ class PostWidget extends StatelessWidget {
     return GestureDetector(
       child: ListTile(
         onTap: (){ 
-          Navigator.of(context).pushNamed('/post-detail', arguments : post);
+          Navigator.of(context).pushNamed('/post-detail', arguments : { "postId": post.id});
         },
         leading: Text(
           '${post.id}',
