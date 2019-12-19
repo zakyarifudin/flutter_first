@@ -26,9 +26,9 @@ class PostProvider {
   }
 
   // Fetch Detail of Post
-  Future<Post> fetchPostDetail(int postId) async {
+  Future<Post> fetchPostDetail(int id) async {
 
-    final response = await _api.getNoAuth('posts/$postId');
+    final response = await _api.getNoAuth('posts/$id');
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body) as Map;

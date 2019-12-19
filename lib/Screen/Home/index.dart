@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(
       context,
       route,
-      arguments :{ "postId" : id }
+      arguments :{ "id" : id }
     );
   }
 
@@ -53,9 +53,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       actions: <Widget>[
                       FlatButton(
                           child: Text('Ok'),
-                          onPressed: () => {
-                            _navigateToScreen(message)
-                          }
+                          onPressed: () => 
+                            Navigator.pushNamed(
+                              context,
+                              message['data']['route'],
+                              arguments :{ "id" : int.parse(message['data']['id']) }
+                            ).then((result) {
+                              Navigator.of(context).pop();
+                            })
                       ),
                   ],
               ),

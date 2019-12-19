@@ -109,7 +109,7 @@ class PostWidget extends StatelessWidget {
     return GestureDetector(
       child: ListTile(
         onTap: (){ 
-          Navigator.of(context).pushNamed('/post-detail', arguments : { "postId": post.id});
+          Navigator.of(context).pushNamed('/post-detail', arguments : { "id": post.id});
         },
         leading: Text(
           '${post.id}',

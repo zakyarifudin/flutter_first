@@ -8,13 +8,13 @@ abstract class PostEvent extends Equatable {
 class Fetch extends PostEvent {}
 
 class FetchDetail extends PostEvent {
-  final int postId;
+  final int id;
 
-  FetchDetail(this.postId);
-
-  @override
-  List<Object> get props => [postId];
+  FetchDetail(this.id);
 
   @override
-  String toString() => 'Post Detail { id: $postId }';
+  List<Object> get props => [id];
+
+  @override
+  String toString() => 'Post Detail { id: $id }';
 }

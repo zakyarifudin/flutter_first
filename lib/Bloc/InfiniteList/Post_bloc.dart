@@ -52,7 +52,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     if (event is FetchDetail) {
       try {
         if (currentState is PostUninitialized) {
-          final post = await _postProvider.fetchPostDetail(event.postId);
+          final post = await _postProvider.fetchPostDetail(event.id);
           yield PostDetailLoaded(post: post); 
           return;
         }

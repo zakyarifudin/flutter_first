@@ -17,7 +17,7 @@ class RouteGenerator {
       case '/infinite-list':
         return PageAnimation(screen: InfiniteList());
       case '/post-detail':
-        return PageAnimation(screen: PostDetail(postId: args['postId']));
+        return PageAnimation(screen: PostDetail(id: args['id']));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

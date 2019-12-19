@@ -3,9 +3,9 @@ import 'package:flutter_first/Bloc/InfiniteList/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostDetail extends StatefulWidget {
-  final postId;
+  final id;
 
-  PostDetail({Key key, @required this.postId}): super(key: key);
+  PostDetail({Key key, @required this.id}): super(key: key);
   
   @override
   _PostDetail createState() => _PostDetail();
@@ -18,7 +18,7 @@ class _PostDetail extends State<PostDetail> {
   @override
   void initState() {
     super.initState();
-    _postBloc = PostBloc()..add(FetchDetail(widget.postId));
+    _postBloc = PostBloc()..add(FetchDetail(widget.id));
   }
 
   @override
@@ -31,7 +31,7 @@ class _PostDetail extends State<PostDetail> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('Post Detail ${widget.postId}'),
+        title: Text('Post Detail ${widget.id}'),
       ),   
       body: BlocBuilder<PostBloc, PostState>(
         bloc: _postBloc,
