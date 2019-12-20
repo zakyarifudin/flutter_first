@@ -16,29 +16,16 @@ class _MyHomePageState extends State<MyHomePage> {
     Schedule()
   ];
 
-  int _selectedIndex = 0;
   final FirebaseMessaging _fcm = FirebaseMessaging();
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  void _navigateToScreen(Map<String, dynamic> message) {
-    final route = message['data']['route'];
-    final id = int.parse(message['data']['id']);
-    Navigator.pushNamed(
-      context,
-      route,
-      arguments :{ "id" : id }
-    );
-  }
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
 
+    _fcm.getToken().then((token){
+      print(token);
+    });
     // untuk fcm nya
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
@@ -74,6 +61,22 @@ class _MyHomePageState extends State<MyHomePage> {
         print("onResume: $message");
         _navigateToScreen(message);
       },
+    );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  void _navigateToScreen(Map<String, dynamic> message) {
+    final route = message['data']['route'];
+    final id = int.parse(message['data']['id']);
+    Navigator.pushNamed(
+      context,
+      route,
+      arguments :{ "id" : id }
     );
   }
 
@@ -170,7 +173,8 @@ class Schedule extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
           ),
-          textColor: Colors.black,
+          textColor: Colors.white,
+          color: Colors.blue,
           child: Container(
             padding: EdgeInsets.all(10.0),
             child: Text(
