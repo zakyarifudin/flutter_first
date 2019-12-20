@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import '../ImageList/index.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -13,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _bottomOptions = <Widget>[
     Home(),
-    Schedule()
+    ImageList()
   ];
 
   final FirebaseMessaging _fcm = FirebaseMessaging();
@@ -33,24 +34,24 @@ class _MyHomePageState extends State<MyHomePage> {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                      content: ListTile(
-                      title: Text(message['notification']['title']),
-                      subtitle: Text(message['notification']['body']),
-                      ),
-                      actions: <Widget>[
-                      FlatButton(
-                          child: Text('Ok'),
-                          onPressed: () => 
-                            Navigator.pushNamed(
-                              context,
-                              message['data']['route'],
-                              arguments :{ "id" : int.parse(message['data']['id']) }
-                            ).then((result) {
-                              Navigator.of(context).pop();
-                            })
-                      ),
-                  ],
-              ),
+                content: ListTile(
+                title: Text(message['notification']['title']),
+                subtitle: Text(message['notification']['body']),
+                ),
+                actions: <Widget>[
+                FlatButton(
+                    child: Text('Ok'),
+                    onPressed: () => 
+                      Navigator.pushNamed(
+                        context,
+                        message['data']['route'],
+                        arguments :{ "id" : int.parse(message['data']['id']) }
+                      ).then((result) {
+                        Navigator.of(context).pop();
+                      })
+                ),
+              ],
+            ),
           );
       },
       onLaunch: (Map<String, dynamic> message) async {
@@ -96,8 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.access_time),
-            title: Text('Scedule'),
+            icon: Icon(Icons.image),
+            title: Text('Images'),
           ),
         ],
         currentIndex: _selectedIndex,
@@ -160,30 +161,3 @@ class Home extends StatelessWidget {
   }
 }
 
-class Schedule extends StatelessWidget {
-  const Schedule({ Key key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        RaisedButton(
-          onPressed: () {},
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
-          ),
-          textColor: Colors.white,
-          color: Colors.blue,
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: Text(
-              'Tara',
-              style: TextStyle(fontSize: 20)
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
