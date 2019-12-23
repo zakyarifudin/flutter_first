@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first/routes.dart';
 import 'package:flutter_first/Bloc/Simple_bloc_delegate.dart';
 import 'package:bloc/bloc.dart';
+import './Screen/SplashScreen/index.dart';
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: MyHomePage(title: 'Flutter Demo'),
+      home: MySplashScreen(),
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: '/',
+      //initialRoute: '/',
     );
   }
 }
