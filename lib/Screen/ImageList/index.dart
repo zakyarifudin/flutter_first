@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first/Screen/ImageList/FullImage.dart';
 
 class ImageList extends StatefulWidget {
   @override
@@ -46,15 +47,26 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => FullImage(image: image)
+        )
+      ),
       child: Container(
         margin: EdgeInsets.all(10),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(50.0)),
           child: Image(
-            image: NetworkImage(image.url, scale: 0.5)
+            image: NetworkImage(image.url, scale: 0.5),
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
           ),
         ),
       )
     );
   }
 }
+
+
+
