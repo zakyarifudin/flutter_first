@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Bloc/InfiniteList/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:http/http.dart' as http;
+import 'package:flutter_first/Screen/InfiniteList/ListLoading.dart';
 
 class InfiniteList extends StatefulWidget {
   @override
@@ -45,9 +45,7 @@ class _InfiniteListState extends State<InfiniteList> {
         bloc: _postBloc,
         builder: (context, state) {
           if (state is PostUninitialized) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return ListLoading();
           }
           if (state is PostError) {
             return Center(
