@@ -22,52 +22,47 @@ class _ImageSliderState extends State<ImageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Image Slider"),
-      ),
-      body: Stack(
-        children: <Widget>[
-          CarouselSlider.builder(
-            scrollDirection: Axis.horizontal,
-            enlargeCenterPage: true,
-            aspectRatio: 2.0,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 2),
-            autoPlayAnimationDuration: Duration(milliseconds: 800),
-            autoPlayCurve: Curves.fastOutSlowIn,
-            onPageChanged: (index) {
-              setState(() {
-                _current = index;
-              });
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return ImageSliderWidget(image: images[index]);
-            },
-            itemCount: images.length
-          ),
-          Positioned(
-            // top: 0.0,
-            left: MediaQuery.of(context).size.width * 0.4,
-            right: MediaQuery.of(context).size.width * 0.4,
-            bottom: -10.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: images.map((image) {
-                return Container(
-                  width: 8.0,
-                  height: 8.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _current == images.indexOf(image) ? Color.fromRGBO(0, 0, 0, 0.9) : Color.fromRGBO(0, 0, 0, 0.4)
-                  ),
-                );
-              }).toList(),
-            )
+    return Stack(
+      children: <Widget>[
+        CarouselSlider.builder(
+          scrollDirection: Axis.horizontal,
+          enlargeCenterPage: true,
+          aspectRatio: 2.0,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 2),
+          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          autoPlayCurve: Curves.fastOutSlowIn,
+          onPageChanged: (index) {
+            setState(() {
+              _current = index;
+            });
+          },
+          itemBuilder: (BuildContext context, int index) {
+            return ImageSliderWidget(image: images[index]);
+          },
+          itemCount: images.length
+        ),
+        Positioned(
+          // top: 0.0,
+          left: MediaQuery.of(context).size.width * 0.4,
+          right: MediaQuery.of(context).size.width * 0.4,
+          bottom: -10.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: images.map((image) {
+              return Container(
+                width: 8.0,
+                height: 8.0,
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _current == images.indexOf(image) ? Color.fromRGBO(0, 0, 0, 0.9) : Color.fromRGBO(0, 0, 0, 0.4)
+                ),
+              );
+            }).toList(),
           )
-        ]
-      ),
+        )
+      ]
     );
   }
 }

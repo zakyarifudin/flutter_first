@@ -160,7 +160,7 @@ class Home extends StatelessWidget {
           margin: EdgeInsets.only(top: 20),
           child: RaisedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/image-slider');
+              Navigator.of(context).pushNamed('/my-financial');
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
@@ -171,7 +171,7 @@ class Home extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(10.0),
               child: Text(
-                'Image Slider',
+                'My Financial',
                 style: TextStyle(fontSize: 20)
               ),
             ),
