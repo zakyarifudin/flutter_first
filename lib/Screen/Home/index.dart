@@ -156,6 +156,27 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/image-slider');
+            },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            textColor: Colors.white,
+            color: Colors.blue,
+            padding: EdgeInsets.all(10),
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Image Slider',
+                style: TextStyle(fontSize: 20)
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

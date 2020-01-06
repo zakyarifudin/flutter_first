@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Screen/Home/HomeBloc.dart';
 import 'package:flutter_first/Screen/Home/index.dart';
+import 'package:flutter_first/Screen/ImageSlider/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/detail.dart';
 
@@ -18,6 +19,8 @@ class RouteGenerator {
         return PageAnimation(screen: InfiniteList());
       case '/post-detail':
         return PageAnimation(screen: PostDetail(id: args['id']));
+      case '/image-slider':
+        return PageAnimation(screen: ImageSlider());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

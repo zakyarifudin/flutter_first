@@ -25,7 +25,7 @@ class _MySplashScreen extends State<MySplashScreen> {
       styleTextUnderTheLoader: TextStyle(),
       photoSize: 100.0,
       onClick: ()=>print("Flutter Indonesia"),
-      loaderColor: Colors.blue,
+      loaderColor: Colors.white,
       loadingText: Text('FROM ZAKY', 
           style: TextStyle(
           fontWeight: FontWeight.bold,
