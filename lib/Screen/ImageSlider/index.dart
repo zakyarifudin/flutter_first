@@ -10,12 +10,10 @@ class ImageSlider extends StatefulWidget {
 class _ImageSliderState extends State<ImageSlider> {
 
   List<ImageModel> images = [
-    // ImageModel(1, "https://images.unsplash.com/photo-1576830065688-ad1e480b863d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjEwNzM3N30"),
-    //ImageModel(2, "https://images.unsplash.com/photo-1562886929-c29b9a76b0a4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjEwNzM3N30"),
-    ImageModel(3, "https://images.unsplash.com/photo-1576808597967-93bd9aaa6bae?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjEwNzM3N30"),
-    // ImageModel(4, "https://images.unsplash.com/photo-1576790359694-14504775f70d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjEwNzM3N30"),
-    // ImageModel(5, "https://images.unsplash.com/photo-1576813906115-5f45de2a4390?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjEwNzM3N30"),
-    ImageModel(6, "https://images.unsplash.com/photo-1576792275520-2226541b2889?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjEwNzM3N30")
+    ImageModel(8, "https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2017/08/Banner-Blog-Seller-Center-1200x630.jpg"),
+    ImageModel(9, "https://cdn1-production-images-kly.akamaized.net/_M41k7HOwoddtyymZSh3xQmH7SI=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1108699/original/046181400_1452582417-HUT_12_673x373.jpg"),
+    ImageModel(10, "https://www.k24klik.com/blog/wp-content/uploads/2019/05/xBLOG-20-24.jpg.pagespeed.ic.JjP98H-Z0h.jpg"),
+    ImageModel(11, "http://media.pricebook.co.id/article/5a2e4183150ba06f577b23c6/5a2e4183150ba06f577b23c6_1512986530.jpg")
   ];
 
   int _current = 0;
@@ -81,11 +79,12 @@ class ImageSliderWidget extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(10),
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(50.0)),       
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),       
           child: FadeInImage(
             fadeInCurve: Curves.ease,
             placeholder: AssetImage('images/loading_now.gif'),
-            image: NetworkImage(image.url, scale: 0.5), 
+            image: NetworkImage(image.url), 
+            fit: BoxFit.fill,
           ),
         ),
       )
