@@ -39,7 +39,7 @@ Widget summaryCash() {
                 Text("Pengeluaran"),
                 Divider(),
                 Text(
-                  "Rp 260.000",
+                  "Rp 259.000",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.redAccent),
                 ),
               ],

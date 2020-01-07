@@ -16,9 +16,12 @@ Widget cardDetail(title, description, price, type) {
       //POSISI KIRI (LEADING), TENGAH (TITLE), BAWAH TENGAH (SUBTITLE) DAN KANAN(TRAILING)
       //SEHINGGA KITA HANYA TINGGAL MEMASUKKAN TEKS YANG SESUAI
       child: ListTile(
-        leading: Icon(
-          type == 'out' ? Icons.subdirectory_arrow_left:Icons.subdirectory_arrow_right,
-          color: type == 'out' ? Colors.redAccent:Colors.lightGreen,
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 7, 0, 0),
+          child: Icon(
+            type == 'out' ? Icons.remove : Icons.add,
+            color: type == 'out' ? Colors.redAccent : Colors.lightGreen,
+          ),
         ),
         title: Text(
           title,
