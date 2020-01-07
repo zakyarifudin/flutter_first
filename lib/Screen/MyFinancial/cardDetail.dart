@@ -5,7 +5,6 @@ Widget cardDetail(title, description, price, type) {
   return Container(
     child: Card(
       shape: RoundedRectangleBorder(
-        //side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(30),
       ),
       //DENGAN MARGIN YANG DISESUAIKAN

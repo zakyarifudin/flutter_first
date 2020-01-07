@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Screen/ImageSlider/index.dart';
+import 'package:flutter_first/Screen/MyFinancial/settingButton.dart';
 import 'cardDetail.dart';
 import 'backgroundHeader.dart';
 import 'summaryCash.dart';
@@ -53,7 +54,7 @@ class _MyFinancial extends State<MyFinancial> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      //debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
           child: Column(
@@ -64,6 +65,7 @@ class _MyFinancial extends State<MyFinancial> with TickerProviderStateMixin{
                   children: <Widget>[
                     backgroundHeader(), 
                     summaryCash(),
+                    settingButton()
                   ],
                 ),
               ),            
