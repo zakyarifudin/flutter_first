@@ -21,7 +21,7 @@ class RouteGenerator {
         return PageAnimation(screen: PostDetail(id: args['id']));
       case '/my-financial':
         return PageAnimation(screen: MyFinancial());
-      default:
+      default:      
         return MaterialPageRoute(
             builder: (_) => Scaffold(
                   body: Center(

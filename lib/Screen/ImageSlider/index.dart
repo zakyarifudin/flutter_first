@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Screen/ImageList/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../MyFinancial/PromoDetail.dart';
 
 class ImageSlider extends StatefulWidget {
   @override
@@ -8,13 +9,13 @@ class ImageSlider extends StatefulWidget {
 }
 
 class _ImageSliderState extends State<ImageSlider> {
-
   List<ImageModel> images = [
     ImageModel(8, "https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2017/08/Banner-Blog-Seller-Center-1200x630.jpg"),
     ImageModel(9, "https://cdn1-production-images-kly.akamaized.net/_M41k7HOwoddtyymZSh3xQmH7SI=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1108699/original/046181400_1452582417-HUT_12_673x373.jpg"),
     ImageModel(10, "https://www.k24klik.com/blog/wp-content/uploads/2019/05/xBLOG-20-24.jpg.pagespeed.ic.JjP98H-Z0h.jpg"),
-    ImageModel(11, "http://media.pricebook.co.id/article/5a2e4183150ba06f577b23c6/5a2e4183150ba06f577b23c6_1512986530.jpg")
+    //ImageModel(11, "http://media.pricebook.co.id/article/5a2e4183150ba06f577b23c6/5a2e4183150ba06f577b23c6_1512986530.jpg")
   ];
+
 
   int _current = 0;
 
@@ -27,7 +28,7 @@ class _ImageSliderState extends State<ImageSlider> {
           enlargeCenterPage: true,
           aspectRatio: 2.0,
           autoPlay: true,
-          autoPlayInterval: Duration(seconds: 2),
+          autoPlayInterval: Duration(seconds: 4),
           autoPlayAnimationDuration: Duration(milliseconds: 800),
           autoPlayCurve: Curves.fastOutSlowIn,
           onPageChanged: (index) {
@@ -68,26 +69,31 @@ class _ImageSliderState extends State<ImageSlider> {
 
 
 class ImageSliderWidget extends StatelessWidget {
-  final ImageModel image;
-
   const ImageSliderWidget({Key key, @required this.image}) : super(key: key);
+
+  final ImageModel image;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print("Yey"),
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => PromoDetail(image: image), maintainState: true)
+        );
+      },
       child: Container(
         margin: EdgeInsets.all(10),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),       
-          child: FadeInImage(
-            fadeInCurve: Curves.ease,
-            placeholder: AssetImage('images/loading_now.gif'),
-            image: NetworkImage(image.url), 
-            fit: BoxFit.fill,
-          ),
+          child: Hero(
+            tag: image.id,
+            child : Image(
+              image: NetworkImage(image.url),
+              fit: BoxFit.fill,
+            )
+          ), 
         ),
-      )
+      ),
     );
   }
 }
