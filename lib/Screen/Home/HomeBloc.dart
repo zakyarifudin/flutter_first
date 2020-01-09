@@ -13,14 +13,14 @@ class HomeBloc extends StatelessWidget {
           builder: (context, state) { 
             return Scaffold(
               appBar: AppBar(
-                title: Text('Coba BLOC Cukk!'),
+                title: Text('Counter With Bloc'),
               ),
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'You have pushed the button this many times cuk:',
+                      'You have pushed the button this many times woy:',
                     ),
                     Text(
                       state.counter.toString(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_first/Screen/Home/menuItem.dart';
 import '../ImageList/index.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -114,69 +115,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return GridView.count(
+      crossAxisCount: 2,
       children: <Widget>[
-        RaisedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/bloc');
-          },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
-          ),
-          textColor: Colors.white,
-          color: Colors.blue,
-          padding: EdgeInsets.all(20),
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: Text(
-              'Menyang BloC',
-              style: TextStyle(fontSize: 20)
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 20),
-          child: RaisedButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/infinite-list');
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-            ),
-            textColor: Colors.white,
-            color: Colors.blue,
-            padding: EdgeInsets.all(10),
-            child: Container(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                'Infinite List',
-                style: TextStyle(fontSize: 20)
-              ),
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 20),
-          child: RaisedButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/my-financial');
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-            ),
-            textColor: Colors.white,
-            color: Colors.blue,
-            padding: EdgeInsets.all(10),
-            child: Container(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                'My Financial',
-                style: TextStyle(fontSize: 20)
-              ),
-            ),
-          ),
-        ),
+        MenuItem(title: 'Counter', route: '/bloc', color: Colors.orangeAccent),
+        MenuItem(title: 'Infinite List', route: '/infinite-list', color: Colors.green),
+        MenuItem(title: 'My Finance', route: '/my-financial'),
       ],
     );
   }
