@@ -17,10 +17,11 @@ class _MySplashScreen extends State<MySplashScreen> {
       title: Text('YEY',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 20.0
+          fontSize: 20.0,
+          color: Colors.orangeAccent
         ),
       ),
-      image: Image.asset('images/bombilla.png'),
+      image: Image.asset('images/koxobin.gif'),
       backgroundColor: Colors.white,
       styleTextUnderTheLoader: TextStyle(),
       photoSize: 100.0,
@@ -30,7 +31,7 @@ class _MySplashScreen extends State<MySplashScreen> {
           style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18.0,
-          color: Colors.blue
+          color: Colors.blueAccent,
         ),
       ),
     );
