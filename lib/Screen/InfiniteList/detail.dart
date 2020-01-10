@@ -31,6 +31,12 @@ class _PostDetail extends State<PostDetail> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon : Icon(Icons.arrow_back_ios), 
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text('Post Detail ${widget.id}'),
       ),   
       body: BlocBuilder<PostBloc, PostState>(
@@ -51,12 +57,12 @@ class _PostDetail extends State<PostDetail> {
             else{
               return SafeArea(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(10, 50, 10, 10),
+                  padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
                   child: Column(
                     children: <Widget>[
                       Container(
                         height: 50,
-                        width: 500,
+                        width: 50,
                         decoration: new BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.all(Radius.circular(25))

@@ -39,6 +39,12 @@ class _InfiniteListState extends State<InfiniteList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon : Icon(Icons.arrow_back_ios), 
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text('Infinite List'),
       ),
       body: BlocBuilder<PostBloc, PostState>(
@@ -98,25 +104,60 @@ class BottomLoader extends StatelessWidget {
 }
 
 class PostWidget extends StatelessWidget {
+
+  PostWidget({Key key, @required this.post}) : super(key: key);
+
   final Post post;
 
-  const PostWidget({Key key, @required this.post}) : super(key: key);
+  final List<Color> colors = [ 
+    Color(0xffFCAEAE),
+    Color(0xff8A8AEA),
+    Color(0xff8A8AEA),
+    Color(0xff34C1D5),
+    Color(0xff34C1D5),
+    Color(0xffFCAEAE),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: ListTile(
-        onTap: (){ 
-          Navigator.of(context).pushNamed('/post-detail', arguments : { "id": post.id});
-        },
-        leading: Text(
-          '${post.id}',
-          style: TextStyle(fontSize: 10.0),
+      child: Container(
+        height: 100,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          margin: EdgeInsets.all(5),
+          elevation: 5,
+          color: colors[post.id % 6],
+          child: ListTile(
+            onTap: (){ 
+              Navigator.of(context).pushNamed('/post-detail', arguments : { "id": post.id});
+            },
+            leading: Padding(
+              padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
+              child: Text(
+                '${post.id}',
+                style: TextStyle(fontSize: 20.0, color: Colors.white),
+              ),
+            ),
+            title: Text(
+              post.title,
+              style: TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              post.body,
+              style: TextStyle(color: Colors.white),  
+              maxLines: 3,
+            ),
+            isThreeLine: true,
+            dense: true,
+            trailing: Padding(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              child: Icon(Icons.arrow_forward_ios, color: Colors.white,),
+            ),
+          ),
         ),
-        title: Text(post.title),
-        isThreeLine: true,
-        subtitle: Text(post.body),
-        dense: true,
       ),
     );
   }
