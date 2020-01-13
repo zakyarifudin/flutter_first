@@ -4,6 +4,7 @@ import 'package:flutter_first/Screen/Home/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/detail.dart';
 import 'package:flutter_first/Screen/MyFinancial/index.dart';
+import 'package:flutter_first/Screen/MyForm/index.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -21,6 +22,8 @@ class RouteGenerator {
         return PageAnimation(screen: PostDetail(id: args['id']));
       case '/my-financial':
         return PageAnimation(screen: MyFinancial());
+      case '/my-form':
+        return PageAnimation(screen: MyForm());
       default:      
         return MaterialPageRoute(
             builder: (_) => Scaffold(

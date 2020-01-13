@@ -121,6 +121,7 @@ class Home extends StatelessWidget {
         MenuItem(title: 'Counter', route: '/bloc', color: Colors.orangeAccent),
         MenuItem(title: 'Infinite List', route: '/infinite-list', color: Colors.green),
         MenuItem(title: 'My Finance', route: '/my-financial'),
+        MenuItem(title: 'My Form', route: '/my-form', color: Colors.black),
       ],
     );
   }
