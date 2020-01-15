@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class MyForm extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class MyForm extends StatefulWidget {
 
 class _MyForm extends State<MyForm> {
   String description;
+  double numberFormat;
   String dropdownValue;
   int multiDropdownValue;
   int radioValue;
@@ -21,9 +24,13 @@ class _MyForm extends State<MyForm> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // untuk number format currency
+  var currController = new MoneyMaskedTextController(decimalSeparator: "", precision: 0);
+
   void initState(){
     super.initState();
     description = '';
+    numberFormat = 0;
     dropdownValue = null;
     multiDropdownValue = null;
     radioValue = null;
@@ -104,7 +111,7 @@ class _MyForm extends State<MyForm> {
       initialTime: timeValue,
     );
 
-    if(picked != null && picked != dateValue){
+    if(picked != null && picked != timeValue){
       print(picked.toString());
       setState(() {
         timeValue = picked;
@@ -162,8 +169,37 @@ class _MyForm extends State<MyForm> {
                           });
                         },
                       ),
+                      TextFormField(
+                        controller: currController,
+                        inputFormatters: [
+                          WhitelistingTextInputFormatter.digitsOnly
+                        ],
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: 'Number Format',
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter number';
+                          }
+                          if(double.parse(value) == 0){
+                            return 'Number must be greater than 0';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          print(double.parse(value));
+                          setState(() {
+                            numberFormat = double.parse(value);
+                          });
+                        },
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Text("Dropdown 1 : ")
+                      ),
                       Center(
-                        child: DropdownButton<String>(
+                        child: DropdownButtonFormField<String>(
                           hint: Text("Dipilih"),
                           value: dropdownValue,
                           items: <String>['AAAA', 'BBBB', 'CCCC', 'DDDD'].map((String value) {
@@ -180,27 +216,42 @@ class _MyForm extends State<MyForm> {
                             onChangeDropdown(value);
                           },
                           isExpanded: true,
-                          itemHeight: 70,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 5),
+                              errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
+                          ),
                         ),
                       ),
-                      Center(
-                        child: DropdownButton<int>(
-                          hint: Text("Pilih yang Atas dulu"),
-                          value: multiDropdownValue,
-                          items: multiItemData.map((MultiItem value) {
-                            return DropdownMenuItem<int>(
-                              value: value.idItem,
-                              child: Text(value.itemName),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            print(value);
-                            setState(() {
-                              multiDropdownValue = value;
-                            });
-                          },
-                          isExpanded: true,
-                          itemHeight: 70,
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Text("Dropdown 2 Nested : ")
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Center(
+                          child: DropdownButtonFormField<int>(
+                            hint: Text("Pilih yang Atas dulu"),
+                            value: multiDropdownValue,
+                            items: multiItemData.map((MultiItem value) {
+                              return DropdownMenuItem<int>(
+                                value: value.idItem,
+                                child: Text(value.itemName),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              print(value);
+                              setState(() {
+                                multiDropdownValue = value;
+                              });
+                            },
+                            isExpanded: true,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(left: 5),
+                                errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
+                            ),
+                          ),
                         ),
                       ),
                       Column(
@@ -245,7 +296,7 @@ class _MyForm extends State<MyForm> {
                             margin: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                                border: Border.all(width: 3, color: Colors.black),
+                                // border: Border.all(width: 3, color: Colors.black),
                                 gradient: LinearGradient(colors: [
                                   Colors.lightBlue,
                                   Colors.amber
@@ -271,7 +322,7 @@ class _MyForm extends State<MyForm> {
                             margin: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                                border: Border.all(width: 3, color: Colors.black),
+                                // border: Border.all(width: 3, color: Colors.black),
                                 gradient: LinearGradient(colors: [
                                   Colors.orange,
                                   Colors.deepOrange,
