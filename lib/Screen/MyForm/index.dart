@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:searchable_dropdown/searchable_dropdown.dart';
 
 class MyForm extends StatefulWidget {
   @override
@@ -13,12 +14,14 @@ class _MyForm extends State<MyForm> {
   double numberFormat;
   String dropdownValue;
   int multiDropdownValue;
+  String searchDropdownValue;
   int radioValue;
   DateTime dateValue;
   TimeOfDay timeValue;
   List<MultiItem> rawData;
   List<MultiItem> multiItemData;
   List<RadioItem> radioItemData;
+  List<DropdownMenuItem> searchDropdownItemData;
   List<CheckBoxItem> checkBoxItemData;
 
   final _formKey = GlobalKey<FormState>();
@@ -33,6 +36,7 @@ class _MyForm extends State<MyForm> {
     numberFormat = 0;
     dropdownValue = null;
     multiDropdownValue = null;
+    searchDropdownValue = null;
     radioValue = null;
     dateValue = DateTime.now();
     timeValue = TimeOfDay.now();
@@ -55,6 +59,16 @@ class _MyForm extends State<MyForm> {
       CheckBoxItem(idCheckBoxItem: 3, checkBoxItemName: "Android"),
       CheckBoxItem(idCheckBoxItem: 4, checkBoxItemName: "IOS")
     ];
+    // untuk search dropdown
+    searchDropdownItemData = [];
+    for(int i=0; i < 20; i++) {
+      searchDropdownItemData.add(new DropdownMenuItem(
+        child: new Text(
+          'test ' + i.toString(),
+        ),
+        value: 'test ' + i.toString(),
+      ));
+    }
   }
 
   List<MultiItem> onChangeDropdown(String value){
@@ -250,6 +264,47 @@ class _MyForm extends State<MyForm> {
                                 contentPadding: EdgeInsets.only(left: 5),
                                 errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Text("Searchable Dropdown :"),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(2)),
+                            border: Border.all(width: 0.5, color: Colors.green),
+//                            gradient: LinearGradient(colors: [
+//                              Colors.lightBlue,
+//                              Colors.amber
+//                            ])
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: SearchableDropdown(
+                              items: searchDropdownItemData,
+                              value: searchDropdownValue,
+                              hint: new Text(
+                                  'Pilih Satu'
+                              ),
+                              searchHint: new Text(
+                                'Pilih Satu',
+                                style: new TextStyle(
+                                    fontSize: 20
+                                ),
+                              ),
+                              onChanged: (value) {
+                                print(value);
+                                setState(() {
+                                  searchDropdownValue = value;
+                                });
+                              },
+                              isExpanded: true,
+                              underline: Container(),
                             ),
                           ),
                         ),
