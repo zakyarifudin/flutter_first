@@ -122,7 +122,7 @@ class PostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        height: 100,
+        // height: 100,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -131,14 +131,16 @@ class PostWidget extends StatelessWidget {
           elevation: 5,
           color: colors[post.id % 6],
           child: ListTile(
-            onTap: (){ 
+            onTap: (){
               Navigator.of(context).pushNamed('/post-detail', arguments : { "id": post.id});
             },
-            leading: Padding(
-              padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
-              child: Text(
-                '${post.id}',
-                style: TextStyle(fontSize: 20.0, color: Colors.white),
+            leading: Container(
+              width: 30,
+              child: Center(
+                child: Text(
+                  '${post.id}',
+                  style: TextStyle(fontSize: 20.0, color: Colors.white),
+                ),
               ),
             ),
             title: Text(
@@ -147,14 +149,16 @@ class PostWidget extends StatelessWidget {
             ),
             subtitle: Text(
               post.body,
-              style: TextStyle(color: Colors.white),  
+              style: TextStyle(color: Colors.white),
               maxLines: 3,
             ),
             isThreeLine: true,
-            dense: true,
-            trailing: Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              child: Icon(Icons.arrow_forward_ios, color: Colors.white,),
+            // dense: true,
+            trailing: Container(
+              width: 30,
+              child: Center(
+                  child: Icon(Icons.arrow_forward_ios, color: Colors.white)
+              ),
             ),
           ),
         ),
