@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_first/Screen/Home/menuItem.dart';
+import 'package:flutter_first/Screen/Home/MenuItem.dart';
 import '../ImageList/index.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -122,6 +122,7 @@ class Home extends StatelessWidget {
         MenuItem(title: 'Infinite List', route: '/infinite-list', color: Colors.green),
         MenuItem(title: 'My Finance', route: '/my-financial'),
         MenuItem(title: 'My Form', route: '/my-form', color: Colors.black),
+        MenuItem(title: "Charts", route: "/charts", color: Colors.deepPurple),
       ],
     );
   }

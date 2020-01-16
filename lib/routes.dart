@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first/Screen/Charts/SimpleBarChart.dart';
+import 'package:flutter_first/Screen/Charts/index.dart';
 import 'package:flutter_first/Screen/Home/HomeBloc.dart';
 import 'package:flutter_first/Screen/Home/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/index.dart';
@@ -24,12 +26,16 @@ class RouteGenerator {
         return PageAnimation(screen: MyFinancial());
       case '/my-form':
         return PageAnimation(screen: MyForm());
+      case '/charts' :
+        return PageAnimation(screen: Charts());
+      case '/charts/bar' :
+        return PageAnimation(screen: SimpleBarChart());
       default:      
         return MaterialPageRoute(
             builder: (_) => Scaffold(
-                  body: Center(
-                      child: Text('Kesasar Kon rute ${settings.name} iki ra ana')),
-                )
+              body: Center(
+                  child: Text('Kesasar Kon rute ${settings.name} iki ra ana')),
+            )
         );
     }
   }
