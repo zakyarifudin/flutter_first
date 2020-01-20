@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
-          GestureDetector(
+          InkWell(
             onTap: (){
               print("More Detail");
             },

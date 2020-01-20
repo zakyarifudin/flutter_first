@@ -400,6 +400,7 @@ class _MyForm extends State<MyForm> {
                           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 100),
                           child: Text('Submit', style: TextStyle(color: Colors.white)),
                           color: Colors.blue,
+                          splashColor: Colors.yellow,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.blueAccent)

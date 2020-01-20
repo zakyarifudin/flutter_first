@@ -54,33 +54,35 @@ class _MyFinancial extends State<MyFinancial> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            SlideTransition(
-              position: _animationSlide,
-              child: Stack(
-                children: <Widget>[
-                  backgroundHeader(), 
-                  summaryCash(),
-                  settingButton()
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              SlideTransition(
+                position: _animationSlide,
+                child: Stack(
+                  children: <Widget>[
+                    backgroundHeader(), 
+                    summaryCash(),
+                    settingButton()
+                  ],
+                ),
+              ),            
+              ScaleTransition(
+                scale: _animationScale,
+                child: cardDetail('Makan Siang', 'Makan di Burjo', '9.000', 'out'), 
               ),
-            ),            
-            ScaleTransition(
-              scale: _animationScale,
-              child: cardDetail('Makan Siang', 'Makan di Burjo', '9.000', 'out'), 
-            ),
-            ScaleTransition(
-              scale: _animationScale,
-              child: cardDetail('Gajian', 'Dapat Gaji', '2.500.000', 'in'),
-            ),
-            ScaleTransition(
-              scale: _animationScale,
-              child: cardDetail('Beli Baju', 'Baju Biasa', '250.000', 'out'),
-            ),
-            ImageSlider()
-          ],
+              ScaleTransition(
+                scale: _animationScale,
+                child: cardDetail('Gajian', 'Dapat Gaji', '2.500.000', 'in'),
+              ),
+              ScaleTransition(
+                scale: _animationScale,
+                child: cardDetail('Beli Baju', 'Baju Biasa', '250.000', 'out'),
+              ),
+              ImageSlider()
+            ],
+          ),
         ),
       ),
     );

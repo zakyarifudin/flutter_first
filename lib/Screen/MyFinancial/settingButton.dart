@@ -4,7 +4,7 @@ Widget settingButton(){
   return Positioned( 
     top: 50,
     right: 30,
-    child: GestureDetector(
+    child: InkWell(
       onTap: () {
         print("Setting Button Yuhu!");
       },

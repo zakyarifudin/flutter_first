@@ -8,7 +8,7 @@ class MenuItem extends StatelessWidget {
   final Color color;
 
   Widget build(BuildContext context){
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(route);
       },
