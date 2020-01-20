@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_first/Screen/Home/CustomDrawer.dart';
 import 'package:flutter_first/Screen/Home/MenuItem.dart';
 import '../ImageList/index.dart';
 
@@ -87,9 +88,25 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: (){
+              print("More Detail");
+            },
+            child: Container(
+              padding: EdgeInsets.only(right: 10),
+              child: Icon(Icons.more_vert, size: 30,)
+            )
+          )
+        ],
       ),
-      body: Center(
-        child: _bottomOptions.elementAt(_selectedIndex)
+      drawer: Drawer(
+        child: CustomDrawer(),
+      ),
+      body: SafeArea(
+        child: Center(
+          child: _bottomOptions.elementAt(_selectedIndex)
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
