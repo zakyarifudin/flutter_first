@@ -277,10 +277,6 @@ class _MyForm extends State<MyForm> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(2)),
                             border: Border.all(width: 0.5, color: Colors.green),
-//                            gradient: LinearGradient(colors: [
-//                              Colors.lightBlue,
-//                              Colors.amber
-//                            ])
                         ),
                         child: Center(
                           child: Padding(

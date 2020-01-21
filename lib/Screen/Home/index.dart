@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_first/Screen/Home/CustomDrawer.dart';
+import 'package:flutter_first/Screen/Home/CustomPopUpMenu.dart';
 import 'package:flutter_first/Screen/Home/MenuItem.dart';
 import '../ImageList/index.dart';
 
@@ -89,20 +90,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
-          InkWell(
-            onTap: (){
-              print("More Detail");
-            },
-            child: Container(
-              padding: EdgeInsets.only(right: 10),
-              child: Icon(Icons.more_vert, size: 30,)
-            )
-          )
+          CustomPopUpMenu()
         ],
       ),
       drawer: Drawer(
         child: CustomDrawer(),
       ),
+      //endDrawer: customPopUpMenu(),
       body: SafeArea(
         child: Center(
           child: _bottomOptions.elementAt(_selectedIndex)
