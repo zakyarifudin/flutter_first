@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class MyForm extends StatefulWidget {
   @override
@@ -18,6 +20,8 @@ class _MyForm extends State<MyForm> {
   int radioValue;
   DateTime dateValue;
   TimeOfDay timeValue;
+  bool isRequiredCheckBox;
+  bool isSubmit;
   List<MultiItem> rawData;
   List<MultiItem> multiItemData;
   List<RadioItem> radioItemData;
@@ -28,7 +32,7 @@ class _MyForm extends State<MyForm> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // untuk number format currency
-  var currController = new MoneyMaskedTextController(decimalSeparator: "", precision: 0);
+  var currController = MoneyMaskedTextController(decimalSeparator: "", precision: 0);
 
   void initState(){
     super.initState();
@@ -40,6 +44,8 @@ class _MyForm extends State<MyForm> {
     radioValue = null;
     dateValue = DateTime.now();
     timeValue = TimeOfDay.now();
+    isRequiredCheckBox = false;
+    isSubmit = false;
     rawData = <MultiItem>[
       MultiItem(1, "11111", "AAAA"),
       MultiItem(2, "22222", "BBBB"),
@@ -62,8 +68,8 @@ class _MyForm extends State<MyForm> {
     // untuk search dropdown
     searchDropdownItemData = [];
     for(int i=0; i < 20; i++) {
-      searchDropdownItemData.add(new DropdownMenuItem(
-        child: new Text(
+      searchDropdownItemData.add(DropdownMenuItem(
+        child: Text(
           'test ' + i.toString(),
         ),
         value: 'test ' + i.toString(),
@@ -94,13 +100,28 @@ class _MyForm extends State<MyForm> {
   void onChangeCheckBox(bool value, CheckBoxItem data){
     data.checked = value;
     print(data.checkBoxItemName);
+
+    bool isChecked = false;
+
     checkBoxItemData.asMap().forEach((index, item){
       if(data.idCheckBoxItem == item.idCheckBoxItem){
         setState(() {
           checkBoxItemData[index] = data;
         });
+        //validasi checkbox saat klik item
+        if(data.checked == true){
+          isChecked = true;
+        }
+      }
+      //validasi checkbox item yg tidak diklik
+      else if(item.checked == true){
+        isChecked = true;
       }
     });
+
+    setState(() {
+      isRequiredCheckBox = isChecked;
+    }); 
   }
 
   Future<Null> selectDate(BuildContext context) async{
@@ -214,6 +235,12 @@ class _MyForm extends State<MyForm> {
                       ),
                       Center(
                         child: DropdownButtonFormField<String>(
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Required';
+                            }
+                            return null;
+                          },
                           hint: Text("Dipilih"),
                           value: dropdownValue,
                           items: <String>['AAAA', 'BBBB', 'CCCC', 'DDDD'].map((String value) {
@@ -245,6 +272,12 @@ class _MyForm extends State<MyForm> {
                         margin: EdgeInsets.only(bottom: 10),
                         child: Center(
                           child: DropdownButtonFormField<int>(
+                            validator: (value) {
+                              if (value == null) {
+                                return 'Required';
+                              }
+                              return null;
+                            },
                             hint: Text("Pilih yang Atas dulu"),
                             value: multiDropdownValue,
                             items: multiItemData.map((MultiItem value) {
@@ -261,22 +294,30 @@ class _MyForm extends State<MyForm> {
                             },
                             isExpanded: true,
                             decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 5),
-                                errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
-                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
+                              contentPadding: EdgeInsets.only(left: 5),
+                              errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
                             ),
                           ),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 10),
-                        child: Text("Searchable Dropdown :"),
+                        child: Text(
+                          "Searchable Dropdown :" + (searchDropdownValue == null && isSubmit == true ? " (Required)" : ""),
+                          style: TextStyle(
+                            color: searchDropdownValue == null && isSubmit == true ? Colors.red : Colors.black
+                          ),
+                        ),
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(2)),
-                            border: Border.all(width: 0.5, color: Colors.green),
+                          borderRadius: BorderRadius.all(Radius.circular(2)),
+                          border: Border.all(
+                            width: 0.5, 
+                            color: searchDropdownValue == null && isSubmit == true ? Colors.red : Colors.black
+                          ),
                         ),
                         child: Center(
                           child: Padding(
@@ -284,13 +325,13 @@ class _MyForm extends State<MyForm> {
                             child: SearchableDropdown(
                               items: searchDropdownItemData,
                               value: searchDropdownValue,
-                              hint: new Text(
+                              hint: Text(
                                   'Pilih Satu'
                               ),
-                              searchHint: new Text(
+                              searchHint: Text(
                                 'Pilih Satu',
-                                style: new TextStyle(
-                                    fontSize: 20
+                                style: TextStyle(
+                                  fontSize: 20
                                 ),
                               ),
                               onChanged: (value) {
@@ -305,39 +346,98 @@ class _MyForm extends State<MyForm> {
                           ),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("Choose cross platform framework below!"),
-                          Row(
-                            children: radioItemData.map((data){
-                              return Row(
-                                children: <Widget>[
-                                  Radio(value: data.idRadioItem, groupValue: radioValue, onChanged: onChangeRadio),
-                                  Text(data.radioItemName)
-                                ],
-                              );
-                            }).toList()
-                          )
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Choose cross platform framework!" + (radioValue == null && isSubmit == true ? " (Required)" : ""),
+                              style: TextStyle(
+                                color: radioValue == null && isSubmit == true ? Colors.red : Colors.black
+                              ),
+                            ),
+                            Row(
+                              children: radioItemData.map((data){
+                                return Row(
+                                  children: <Widget>[
+                                    Radio(value: data.idRadioItem, groupValue: radioValue, onChanged: onChangeRadio),
+                                    Text(data.radioItemName)
+                                  ],
+                                );
+                              }).toList()
+                            ),
+                          ],
+                        ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("Choose your platform below!"),
+                          Text(
+                            "Choose your platform below!" + (isRequiredCheckBox == false && isSubmit == true ? " (Required)" : ""),
+                            style: TextStyle(
+                              color: isRequiredCheckBox == false && isSubmit == true ? Colors.red : Colors.black
+                            ),
+                          ),
                           Row(
                             children: checkBoxItemData.map((data){
                               return Row(
                                 children: <Widget>[
-                                  Checkbox(value: data.checked, onChanged: (value) {
-                                    onChangeCheckBox(value, data);
-                                  }, activeColor: Colors.green),
+                                  Checkbox(
+                                    value: data.checked, 
+                                    onChanged: (value) {
+                                      onChangeCheckBox(value, data);
+                                    }, 
+                                    activeColor: Colors.green,
+                                  ),
                                   Text(data.checkBoxItemName)
                                 ],
                               );
                             }).toList()
                           )
                         ],
+                      ),
+                      Transform.scale(
+                        scale: 0.8,
+                        alignment: Alignment.center,  
+                        child: Center(
+                          child: LiteRollingSwitch(
+                            //initial value
+                            value: true,
+                            textOn: 'Active',
+                            textOff: 'Inactive',
+                            colorOn: Colors.greenAccent[700],
+                            colorOff: Colors.redAccent[700],
+                            iconOn: Icons.done,
+                            iconOff: Icons.cancel,
+                            textSize: 16.0,
+                            animationDuration: Duration(milliseconds: 500),
+                            onChanged: (bool state) {
+                              //Use it to manage the different states
+                              print('Current State of SWITCH IS: $state');
+                            },
+                          ),                         
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        child: Center(
+                          child: ToggleSwitch(
+                            initialLabelIndex: 0,
+                            minWidth: 100.0,
+                            cornerRadius: 15,
+                            activeBgColor: Colors.grey,
+                            activeTextColor: Colors.white,
+                            inactiveBgColor: Colors.grey,
+                            inactiveTextColor: Colors.white,
+                            labels: ['Male', 'Female'],
+                            icons: [Icons.accessibility_new, Icons.accessibility],
+                            activeColors: [Colors.blue, Colors.pink[200]],
+                            onToggle: (index) {
+                              print('Toggle switch to: $index');
+                            }
+                          ),
+                        ),
                       ),
                       GestureDetector(
                         child: Center(
@@ -402,6 +502,9 @@ class _MyForm extends State<MyForm> {
                             side: BorderSide(color: Colors.blueAccent)
                           ),
                           onPressed: () {
+                            setState(() {
+                              isSubmit = true;
+                            });
                             if (_formKey.currentState.validate()) {
                               print(radioValue);
                               _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Your Data ...')));
