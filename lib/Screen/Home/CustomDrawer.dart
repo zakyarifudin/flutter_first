@@ -29,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
     CustomDrawerCardData(
       icon: Icons.save_alt,
       title: "Download",
-      body: "Your files download",
+      body: "Your download files",
       color: Colors.green
     ),
     CustomDrawerCardData(

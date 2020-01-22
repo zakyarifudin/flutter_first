@@ -127,13 +127,14 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 2,
+      crossAxisCount: MediaQuery.of(context).size.height > MediaQuery.of(context).size.width ? 2 : 4,
       children: <Widget>[
         MenuItem(title: 'Counter', route: '/bloc', color: Colors.orangeAccent),
         MenuItem(title: 'Infinite List', route: '/infinite-list', color: Colors.green),
         MenuItem(title: 'My Finance', route: '/my-financial'),
         MenuItem(title: 'My Form', route: '/my-form', color: Colors.black),
         MenuItem(title: "Charts", route: "/charts", color: Colors.deepPurple),
+        MenuItem(title: "Intro", route: "/intro", color: Colors.redAccent),
       ],
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter_first/Screen/Home/HomeBloc.dart';
 import 'package:flutter_first/Screen/Home/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/index.dart';
 import 'package:flutter_first/Screen/InfiniteList/detail.dart';
+import 'package:flutter_first/Screen/Intro/index.dart';
 import 'package:flutter_first/Screen/MyFinancial/index.dart';
 import 'package:flutter_first/Screen/MyForm/index.dart';
 
@@ -30,6 +31,8 @@ class RouteGenerator {
         return PageAnimation(screen: Charts());
       case '/charts/bar' :
         return PageAnimation(screen: SimpleBarChart());
+      case '/intro' :
+        return PageAnimation(screen: Intro());
       default:      
         return MaterialPageRoute(
             builder: (_) => Scaffold(
