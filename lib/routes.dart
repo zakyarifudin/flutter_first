@@ -16,7 +16,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => MyHomePage(title: 'Rumahku'));
+        return MaterialPageRoute(builder: (_) => MyHomePage());
       case '/bloc':
         return PageAnimation(screen: HomeBloc());
       case '/infinite-list':

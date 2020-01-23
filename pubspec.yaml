@@ -19,6 +19,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   bloc: ^2.0.0
   flutter_bloc: ^2.0.0
   equatable: ^0.6.0
@@ -62,6 +64,9 @@ flutter:
     - images/koxobin.gif
     - images/eraser.png
     - images/pencil.png
+
+    - i18n/en.json
+    - i18n/id.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

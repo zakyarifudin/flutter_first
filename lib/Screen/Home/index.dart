@@ -3,13 +3,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_first/Screen/Home/CustomDrawer.dart';
 import 'package:flutter_first/Screen/Home/CustomPopUpMenu.dart';
 import 'package:flutter_first/Screen/Home/MenuItem.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 import '../ImageList/index.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -88,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context).translate("My Home")),
         actions: <Widget>[
           CustomPopUpMenu()
         ],
@@ -106,11 +103,11 @@ class _MyHomePageState extends State<MyHomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text(AppLocalizations.of(context).translate('Home')),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.image),
-            title: Text('Images'),
+            title: Text(AppLocalizations.of(context).translate('Images')),
           ),
         ],
         currentIndex: _selectedIndex,
@@ -129,12 +126,12 @@ class Home extends StatelessWidget {
     return GridView.count(
       crossAxisCount: MediaQuery.of(context).size.height > MediaQuery.of(context).size.width ? 2 : 4,
       children: <Widget>[
-        MenuItem(title: 'Counter', route: '/bloc', color: Colors.orangeAccent),
-        MenuItem(title: 'Infinite List', route: '/infinite-list', color: Colors.green),
-        MenuItem(title: 'My Finance', route: '/my-financial'),
-        MenuItem(title: 'My Form', route: '/my-form', color: Colors.black),
-        MenuItem(title: "Charts", route: "/charts", color: Colors.deepPurple),
-        MenuItem(title: "Intro", route: "/intro", color: Colors.redAccent),
+        MenuItem(title: AppLocalizations.of(context).translate('Counter') , route: '/bloc', color: Colors.orangeAccent),
+        MenuItem(title: AppLocalizations.of(context).translate('Infinite List'), route: '/infinite-list', color: Colors.green),
+        MenuItem(title: AppLocalizations.of(context).translate('My Finance'), route: '/my-financial'),
+        MenuItem(title: AppLocalizations.of(context).translate('My Form'), route: '/my-form', color: Colors.black),
+        MenuItem(title: AppLocalizations.of(context).translate('Charts'), route: "/charts", color: Colors.deepPurple),
+        MenuItem(title: AppLocalizations.of(context).translate('Intro'), route: "/intro", color: Colors.redAccent),
       ],
     );
   }

@@ -6,10 +6,8 @@ abstract class CounterState extends Equatable {
   final int counter;
 
   CounterState(this.counter);
-  //CounterState(this.counter, [this.propss]);
 
-  // @override
-  // List<Object> get props => (propss);
+  @override
   List<Object> get props => [counter];
 
 }

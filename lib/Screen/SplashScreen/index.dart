@@ -13,7 +13,7 @@ class _MySplashScreen extends State<MySplashScreen> {
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 5,
-      navigateAfterSeconds: MyHomePage(title: "Rumahku"),
+      navigateAfterSeconds: MyHomePage(),
       title: Text('YEY',
         style: TextStyle(
           fontWeight: FontWeight.bold,

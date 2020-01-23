@@ -52,7 +52,7 @@ class _IntroState extends State<Intro> {
     return IntroSlider(
       slides: slides,
       onDonePress: (){
-        Navigator.pushNamed(context, "/");
+        Navigator.pop(context);
       },
       nameSkipBtn: "LEWATI",
       // nameDoneBtn: "SELESAI",

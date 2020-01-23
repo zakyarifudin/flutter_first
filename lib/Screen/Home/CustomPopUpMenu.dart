@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_first/Bloc/Language/index.dart';
 
 
 class CustomPopUpMenu extends StatefulWidget {
@@ -8,27 +10,28 @@ class CustomPopUpMenu extends StatefulWidget {
 
 class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
 
-  int itemSelected;
+  String itemSelected;
   List<PopupMenuEntry<Object>> list = [];
-
-  void onSelected(value){
-    if(value != 0){
-      setState(() {
-        itemSelected = value;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      itemSelected = 2;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+   
+    //ignore: close_sinks
+    final _languageBloc = BlocProvider.of<LanguageBloc>(context);
+
+    setState(() {
+      itemSelected = _languageBloc.state.languageCode;
+    });
+
+    void onSelected(value){
+      if(value != 0){
+        setState(() {
+          itemSelected = value;
+        });
+        _languageBloc.add(ChangeLanguage(value));
+      }
+    }
+
     return PopupMenuButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
@@ -58,8 +61,8 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
               "English",
               style: TextStyle(color: Colors.black),
             ),
-            value: 1,
-            checked: itemSelected == 1 ? true : false,
+            value: "en",
+            checked: itemSelected == "en" ? true : false,
           ),
         );
         list.add(
@@ -68,8 +71,8 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
               "Indonesia",
               style: TextStyle(color: Colors.black),
             ),
-            value: 2,
-            checked: itemSelected == 2 ? true : false,
+            value: "id",
+            checked: itemSelected == "id" ? true : false,
           ),
         );
         list.add(
@@ -78,8 +81,8 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
               "العربية",
               style: TextStyle(color: Colors.black),
             ),
-            value: 3,
-            checked: itemSelected == 3 ? true : false,
+            value: "ar",
+            checked: itemSelected == "ar" ? true : false,
           ),
         );
         list.add(
@@ -88,8 +91,8 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
               "日本語",
               style: TextStyle(color: Colors.black),
             ),
-            value: 4,
-            checked: itemSelected == 4 ? true : false,
+            value: "ja",
+            checked: itemSelected == "ja" ? true : false,
           ),
         );
         list.add(
@@ -98,8 +101,8 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
               "한국어",
               style: TextStyle(color: Colors.black),
             ),
-            value: 5,
-            checked: itemSelected == 5 ? true : false,
+            value: "ko",
+            checked: itemSelected == "ko" ? true : false,
           ),
         );
         
@@ -109,8 +112,8 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
               "简体中文",
               style: TextStyle(color: Colors.black),
             ),
-            value: 6,
-            checked: itemSelected == 6 ? true : false,
+            value: "cn",
+            checked: itemSelected == "cn" ? true : false,
           ),
         );
         return list;
