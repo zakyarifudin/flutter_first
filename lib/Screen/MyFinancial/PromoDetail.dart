@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Screen/ImageList/index.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 
 class PromoDetail extends StatefulWidget {
   PromoDetail({Key key, this.image}) : super(key: key);
@@ -55,8 +56,8 @@ class _PromoDetail extends State<PromoDetail> with SingleTickerProviderStateMixi
                   unselectedLabelColor: Colors.grey,
                   controller: tabController,
                   tabs: [
-                    Tab(text: "Info"),
-                    Tab(text: "Cara"),
+                    Tab(text: AppLocalizations.of(context).translate("Info")),
+                    Tab(text: AppLocalizations.of(context).translate("How To")),
                   ],
                 ),
               ),

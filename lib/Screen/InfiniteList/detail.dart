@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Bloc/InfiniteList/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 
 class PostDetail extends StatefulWidget {
   final id;
@@ -37,7 +38,7 @@ class _PostDetail extends State<PostDetail> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Post Detail ${widget.id}'),
+        title: Text(AppLocalizations.of(context).translate("Post Detail") + ' ${widget.id}'),
       ),   
       body: BlocBuilder<PostBloc, PostState>(
         bloc: _postBloc,

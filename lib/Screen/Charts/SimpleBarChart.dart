@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_first/language/App_localizations.dart';
 
 class SimpleBarChart extends StatelessWidget {
   final List<AnnualSales> data = [
@@ -27,7 +28,7 @@ class SimpleBarChart extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: Text("Bar Chart"),
+        title: Text(AppLocalizations.of(context).translate("Bar Chart")),
       ),
       body: Container(
         // color: Colors.black,
@@ -39,7 +40,7 @@ class SimpleBarChart extends StatelessWidget {
               height: 30,
               child: Center(
                 child: Text(
-                  "Simple Bar Chart ^_^",
+                  AppLocalizations.of(context).translate("Simple Bar Chart") + " ^_^",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold

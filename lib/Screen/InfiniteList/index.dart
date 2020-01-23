@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first/Bloc/InfiniteList/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first/Screen/InfiniteList/ListLoading.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 
 class InfiniteList extends StatefulWidget {
   @override
@@ -40,12 +41,12 @@ class _InfiniteListState extends State<InfiniteList> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon : Icon(Icons.arrow_back_ios), 
+          icon : Icon(Icons.arrow_back_ios, size: 20), 
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Infinite List'),
+        title: Text(AppLocalizations.of(context).translate('Infinite List')),
       ),
       body: BlocBuilder<PostBloc, PostState>(
         bloc: _postBloc,
@@ -55,13 +56,17 @@ class _InfiniteListState extends State<InfiniteList> {
           }
           if (state is PostError) {
             return Center(
-              child: Text('failed to fetch posts'),
+              child: Text(
+                AppLocalizations.of(context).translate("Failed To Fetch Posts")
+              ),
             );
           }
           if (state is PostLoaded) {
             if (state.posts.isEmpty) {
               return Center(
-                child: Text('no posts'),
+                child: Text(
+                  AppLocalizations.of(context).translate("No Posts")
+                ),
               );
             }
             return ListView.builder(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first/Bloc/Language/index.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 
 
 class CustomPopUpMenu extends StatefulWidget {
@@ -46,7 +47,10 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
         var list = List<PopupMenuEntry<Object>>();
         list.add(
           PopupMenuItem(
-            child: Text("Setting Language", style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(
+              AppLocalizations.of(context).translate('Setting Language'),
+              style: TextStyle(fontWeight: FontWeight.bold)
+            ),
             value: 0,
           ),
         );
@@ -58,7 +62,7 @@ class _CustomPopUpMenuState extends State<CustomPopUpMenu> {
         list.add(
           CheckedPopupMenuItem(
             child: Text(
-              "English",
+               AppLocalizations.of(context).translate('English'),
               style: TextStyle(color: Colors.black),
             ),
             value: "en",

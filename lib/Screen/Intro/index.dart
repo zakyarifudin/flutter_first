@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
@@ -54,7 +55,7 @@ class _IntroState extends State<Intro> {
       onDonePress: (){
         Navigator.pop(context);
       },
-      nameSkipBtn: "LEWATI",
+      nameSkipBtn: AppLocalizations.of(context).translate("Skip").toUpperCase(),
       // nameDoneBtn: "SELESAI",
       // nameNextBtn: "LANJUT",
       // namePrevBtn: "KEMBALI",

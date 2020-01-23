@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
@@ -168,7 +169,7 @@ class _MyForm extends State<MyForm> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text("My Form"),
+        title: Text(AppLocalizations.of(context).translate("My Form")),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

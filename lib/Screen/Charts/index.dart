@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 
 class Charts extends StatefulWidget {
   @override
@@ -17,12 +18,15 @@ class _ChartsState extends State<Charts> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text("Charts"),
+        title: Text(AppLocalizations.of(context).translate("Charts")),
       ),
       body: Container(
         child: ListView(
           children: <Widget>[
-            ChartWidget(title: "Bar Chart", route: "/charts/bar")
+            ChartWidget(
+              title: "Bar Chart", 
+              route: "/charts/bar"
+            )
           ],
         ),
       ),
@@ -62,7 +66,7 @@ class ChartWidget extends StatelessWidget {
           color: colors[random.nextInt(3)],
           child: Center(
             child: Text(
-              title,
+              AppLocalizations.of(context).translate(title),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 27

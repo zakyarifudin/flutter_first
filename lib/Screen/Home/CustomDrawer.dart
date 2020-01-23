@@ -1,26 +1,27 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_first/language/App_localizations.dart';
 
 class CustomDrawer extends StatelessWidget {
 
   final List<CustomDrawerCardData> profil = [
     CustomDrawerCardData(
       icon: Icons.account_circle,
-      title: "Profil",
-      body: "Your Profil Detail",
+      title: "Profile",
+      body: "Profile Desc",
       color: Colors.lightBlueAccent
     ),
     CustomDrawerCardData(
       icon: Icons.star_border,
       title: "Favorite",
-      body: "Your Topic Favorite",
+      body: "Favorite Desc",
       color: Colors.amber
     ),
     CustomDrawerCardData(
       icon: Icons.account_balance_wallet,
       title: "Balance",
-      body: "Balance Detail",      
+      body: "Balance Desc",      
       color: Colors.blue
     ),
   ];
@@ -29,31 +30,31 @@ class CustomDrawer extends StatelessWidget {
     CustomDrawerCardData(
       icon: Icons.save_alt,
       title: "Download",
-      body: "Your download files",
+      body: "Download Desc",
       color: Colors.green
     ),
     CustomDrawerCardData(
       icon: Icons.music_note,
       title: "Musics",
-      body: "All Music in the world",
+      body: "Musics Desc",
       color: Colors.pink
     ),
     CustomDrawerCardData(
       icon: Icons.video_library,
       title: "Videos",
-      body: "Trend videos and more",
+      body: "Videos Desc",
       color: Colors.red
     ),
     CustomDrawerCardData(
       icon: Icons.add_shopping_cart,
       title: "Shopping",
-      body: "Buy more our products",
+      body: "Shopping Desc",
       color: Colors.orange
     ),
     CustomDrawerCardData(
       icon: Icons.add_alarm,
       title: "Reminder",
-      body: "Make your reminder",
+      body: "Reminder Desc",
       color: Colors.cyan
     ),
   ];
@@ -62,7 +63,7 @@ class CustomDrawer extends StatelessWidget {
     CustomDrawerCardData(
       icon: Icons.message,
       title: "Help",
-      body: "Ask Question in here",
+      body: "Help Desc",
       color: Colors.purple
     ),
     CustomDrawerCardData(
@@ -188,7 +189,7 @@ class CustomDrawerCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  data.title,
+                  AppLocalizations.of(context).translate(data.title),
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold
@@ -197,7 +198,7 @@ class CustomDrawerCard extends StatelessWidget {
                 data.body != ''
                 ?
                   Text(
-                    data.body,
+                    AppLocalizations.of(context).translate(data.body),
                     style: TextStyle(
                       fontSize: 14,
                     ),
