@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget summaryCash() {
+Widget summaryCash(String income, String expenditure) {
   //CONTAINER KEDUA INI BERWARNA PUTIH, KITA SET POSITIONEDNYA DENGAN MENENTUKAN VALUE DARI TOP DAN LEFT AGAR BERADA DITENGAH, DISESUAIKAN SAJA
   return Positioned(
     top: 130,
@@ -26,7 +26,7 @@ Widget summaryCash() {
             //MASING-MASING OBJECT MENGGUNAKAN COLUMN LAGI ADA DUA BUAH TEKS YANG INGIN DITAMPILKAN SECARA VERTICAL
             Column(
               children: <Widget>[
-                Text("Pemasukan"),
+                Text(income),
                 Divider(),
                 Text(
                   "Rp 2.500.000",
@@ -36,7 +36,7 @@ Widget summaryCash() {
             ),
             Column(
               children: <Widget>[
-                Text("Pengeluaran"),
+                Text(expenditure),
                 Divider(),
                 Text(
                   "Rp 259.000",

@@ -191,11 +191,11 @@ class _MyForm extends State<MyForm> {
                       TextFormField(
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          labelText: 'Description',
+                          labelText: AppLocalizations.of(context).translate("Description"),
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter some text';
+                            return AppLocalizations.of(context).translate("Required");
                           }
                           return null;
                         },
@@ -212,14 +212,14 @@ class _MyForm extends State<MyForm> {
                         ],
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: 'Number Format',
+                          labelText: AppLocalizations.of(context).translate("Number Format"),
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter number';
+                            return AppLocalizations.of(context).translate("Required");
                           }
                           if(double.parse(value) == 0){
-                            return 'Number must be greater than 0';
+                            return AppLocalizations.of(context).translate("Number>0");
                           }
                           return null;
                         },
@@ -232,17 +232,17 @@ class _MyForm extends State<MyForm> {
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 10),
-                          child: Text("Dropdown 1 : ")
+                          child: Text(AppLocalizations.of(context).translate("Dropdown 1") + " : ")
                       ),
                       Center(
                         child: DropdownButtonFormField<String>(
                           validator: (value) {
                             if (value == null) {
-                              return 'Required';
+                              return AppLocalizations.of(context).translate("Required");
                             }
                             return null;
                           },
-                          hint: Text("Dipilih"),
+                          hint: Text(AppLocalizations.of(context).translate("Select")),
                           value: dropdownValue,
                           items: <String>['AAAA', 'BBBB', 'CCCC', 'DDDD'].map((String value) {
                             return DropdownMenuItem<String>(
@@ -267,7 +267,7 @@ class _MyForm extends State<MyForm> {
                       ),
                       Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
-                          child: Text("Dropdown 2 Nested : ")
+                          child: Text(AppLocalizations.of(context).translate("Dropdown 2") + " : ")
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 10),
@@ -275,11 +275,11 @@ class _MyForm extends State<MyForm> {
                           child: DropdownButtonFormField<int>(
                             validator: (value) {
                               if (value == null) {
-                                return 'Required';
+                                return AppLocalizations.of(context).translate("Required");
                               }
                               return null;
                             },
-                            hint: Text("Pilih yang Atas dulu"),
+                            hint: Text(AppLocalizations.of(context).translate("Select Top First")),
                             value: multiDropdownValue,
                             items: multiItemData.map((MultiItem value) {
                               return DropdownMenuItem<int>(
@@ -305,7 +305,12 @@ class _MyForm extends State<MyForm> {
                       Container(
                         margin: EdgeInsets.only(bottom: 10),
                         child: Text(
-                          "Searchable Dropdown :" + (searchDropdownValue == null && isSubmit == true ? " (Required)" : ""),
+                          AppLocalizations.of(context).translate("Searchable Dropdown") + " :" 
+                          + (
+                              searchDropdownValue == null && isSubmit == true 
+                              ? " (" + AppLocalizations.of(context).translate("Required")  + ")" 
+                              : ""
+                            ),
                           style: TextStyle(
                             color: searchDropdownValue == null && isSubmit == true ? Colors.red : Colors.black
                           ),
@@ -327,10 +332,10 @@ class _MyForm extends State<MyForm> {
                               items: searchDropdownItemData,
                               value: searchDropdownValue,
                               hint: Text(
-                                  'Pilih Satu'
+                                AppLocalizations.of(context).translate("Select One")
                               ),
                               searchHint: Text(
-                                'Pilih Satu',
+                                AppLocalizations.of(context).translate("Select One"),
                                 style: TextStyle(
                                   fontSize: 20
                                 ),
@@ -353,7 +358,12 @@ class _MyForm extends State<MyForm> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Choose cross platform framework!" + (radioValue == null && isSubmit == true ? " (Required)" : ""),
+                              AppLocalizations.of(context).translate("Choose Framework") + 
+                              (
+                                radioValue == null && isSubmit == true 
+                                  ? " (" + AppLocalizations.of(context).translate("Required") +")" 
+                                  : ""
+                              ),
                               style: TextStyle(
                                 color: radioValue == null && isSubmit == true ? Colors.red : Colors.black
                               ),
@@ -375,7 +385,12 @@ class _MyForm extends State<MyForm> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Choose your platform below!" + (isRequiredCheckBox == false && isSubmit == true ? " (Required)" : ""),
+                            AppLocalizations.of(context).translate("Choose Platform") + 
+                            (
+                              isRequiredCheckBox == false && isSubmit == true 
+                                ? " (" + AppLocalizations.of(context).translate("Required") +")" 
+                                : ""
+                            ),
                             style: TextStyle(
                               color: isRequiredCheckBox == false && isSubmit == true ? Colors.red : Colors.black
                             ),
@@ -405,8 +420,8 @@ class _MyForm extends State<MyForm> {
                           child: LiteRollingSwitch(
                             //initial value
                             value: true,
-                            textOn: 'Active',
-                            textOff: 'Inactive',
+                            textOn: AppLocalizations.of(context).translate("Active"),
+                            textOff: AppLocalizations.of(context).translate("Inactive"),
                             colorOn: Colors.greenAccent[700],
                             colorOff: Colors.redAccent[700],
                             iconOn: Icons.done,
@@ -431,7 +446,10 @@ class _MyForm extends State<MyForm> {
                             activeTextColor: Colors.white,
                             inactiveBgColor: Colors.grey,
                             inactiveTextColor: Colors.white,
-                            labels: ['Male', 'Female'],
+                            labels: [
+                              AppLocalizations.of(context).translate("Male"),
+                              AppLocalizations.of(context).translate("Female")
+                            ],
                             icons: [Icons.accessibility_new, Icons.accessibility],
                             activeColors: [Colors.blue, Colors.pink[200]],
                             onToggle: (index) {
@@ -456,7 +474,10 @@ class _MyForm extends State<MyForm> {
                             ),
                             child: Center(
                                 child: Text(
-                                    "Date : " + dateValue.day.toString() + "-" + dateValue.month.toString() + "-" + dateValue.year.toString(),
+                                    AppLocalizations.of(context).translate("Date") + " : " + 
+                                    dateValue.day.toString() + "-" + 
+                                    dateValue.month.toString() + "-" + 
+                                    dateValue.year.toString(),
                                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, )
                                 )
                             ),
@@ -482,7 +503,9 @@ class _MyForm extends State<MyForm> {
                             ),
                             child: Center(
                                 child: Text(
-                                    "Time : " + timeValue.hour.toString() + ":" + timeValue.minute.toString(),
+                                    AppLocalizations.of(context).translate("Time") + " : " + 
+                                    timeValue.hour.toString() + ":" + 
+                                    timeValue.minute.toString(),
                                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, )
                                 )
                             ),
@@ -495,7 +518,10 @@ class _MyForm extends State<MyForm> {
                       Center(
                         child: RaisedButton(
                           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 100),
-                          child: Text('Submit', style: TextStyle(color: Colors.white)),
+                          child: Text(
+                            AppLocalizations.of(context).translate("Submit").toUpperCase(), 
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
+                          ),
                           color: Colors.blue,
                           splashColor: Colors.yellow,
                           shape: RoundedRectangleBorder(
@@ -508,7 +534,11 @@ class _MyForm extends State<MyForm> {
                             });
                             if (_formKey.currentState.validate()) {
                               print(radioValue);
-                              _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Processing Your Data ...')));
+                              _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text(AppLocalizations.of(context).translate("Processing Your Data") + " ...")
+                                )
+                              );
                             }
                           },
                         ),

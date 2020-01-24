@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first/Screen/ImageSlider/index.dart';
 import 'package:flutter_first/Screen/MyFinancial/settingButton.dart';
-import 'cardDetail.dart';
-import 'backgroundHeader.dart';
-import 'summaryCash.dart';
+import 'package:flutter_first/language/App_localizations.dart';
+import 'package:flutter_first/Screen/MyFinancial/cardDetail.dart';
+import 'package:flutter_first/Screen/MyFinancial/backgroundHeader.dart';
+import 'package:flutter_first/Screen/MyFinancial/summaryCash.dart';
 
 class MyFinancial extends StatefulWidget {
   @override
@@ -46,9 +47,9 @@ class _MyFinancial extends State<MyFinancial> with TickerProviderStateMixin{
   }
 
   void dispose(){
-    super.dispose();
     _controllerScale.dispose();
     _controllerSlide.dispose();
+    super.dispose();
   }
 
   @override
@@ -63,7 +64,10 @@ class _MyFinancial extends State<MyFinancial> with TickerProviderStateMixin{
                 child: Stack(
                   children: <Widget>[
                     backgroundHeader(), 
-                    summaryCash(),
+                    summaryCash(
+                      AppLocalizations.of(context).translate("Income"),
+                      AppLocalizations.of(context).translate("Expenditure"),
+                    ),
                     settingButton()
                   ],
                 ),
